@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('firstname');
             $table->string('lastname');
+            $table->string('image')->nullable();
             $table->string('university');
             $table->string('department');
             $table->string('expertise');

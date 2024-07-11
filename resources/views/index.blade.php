@@ -21,18 +21,20 @@
             </a>
 
         </div>
+        @if(@session()->has('success'))
+        <p>{{ session('success') }}</p>
+        @endif
         <div class="sm:grid grid-cols-2 gap-6 my-10">
 @foreach ($teamlist as $member)
             <div class="max-w-sm w-full lg:max-w-full lg:flex mx-auto my-10">
-                <div class="h-48 lg:h-auto lg:w-48 flex-none bg-cover rounded-t lg:rounded-t-none lg:rounded-l text-center overflow-hidden"
-                    style="background-image: url('https://images.pexels.com/photos/3785084/pexels-photo-3785084.jpeg?auto=compress&amp;cs=tinysrgb&amp;dpr=1&amp;w=500')"
-                    title="Woman holding a mug">
+                <div class="h-48 lg:h-auto lg:w-48 flex-none bg-cover rounded-t lg:rounded-t-none lg:rounded-l text-center overflow-hidden">
+                    <img src="./images/1720687450.jpg" alt="{{ $member->firstname }}" >
                 </div>
                 <div
                     class="border-r border-b border-l border-gray-400 lg:border-l-0 lg:border-t lg:border-gray-400 bg-white rounded-b lg:rounded-b-none lg:rounded-r p-4">
                     <div class="">
                         <a href="#"
-                            class="text-gray-900 font-bold text-xl mb-2 hover:text-indigo-600 transition duration-500 ease-in-out">{{ $member->firstname }}</a>
+                            class="text-gray-900 font-bold text-xl mb-2 hover:text-indigo-600 transition duration-500 ease-in-out">{{ $member->firstname }}  {{$member->lastname }}</a>
                         <p class="text-sm text-gray-600">
                             {{ $member->expertise }}
                         </p>

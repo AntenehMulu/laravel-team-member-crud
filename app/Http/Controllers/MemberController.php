@@ -16,15 +16,18 @@ class MemberController extends Controller
         return view('create');
     }
     public function store(Request $request){
-        $data=$request->validate([
+       $data=$request->validate([
                 "firstname"=>"required",
                 "lastname"=>"required",
+                'image' => 'required|image',
                 "university"=>"required",
                 "department"=>"required",
                 "expertise"=>"required"
         ]);
+        $imageName = time().'.'.$request->image->extension();
+        $request->image->move(public_path('images'), $imageName);
         TeamMember::create($data);
-        return redirect(route('member.list'));
+        return redirect(route('member.list'))->with('success', 'The Member info added successfully');
     }
     public function edit(TeamMember $teamMember){
         return view('edit',['specmember'=>$teamMember]);
