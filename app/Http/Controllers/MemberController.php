@@ -19,13 +19,14 @@ class MemberController extends Controller
        $data=$request->validate([
                 "firstname"=>"required",
                 "lastname"=>"required",
-                'image' => 'required|image',
+                'image' => 'nullable',
                 "university"=>"required",
                 "department"=>"required",
                 "expertise"=>"required"
         ]);
-        $imageName = time().'.'.$request->image->extension();
-        $request->image->move(public_path('images'), $imageName);
+        if($request->hasFile('image')){
+            $data['image']=$request->file('image')->store('member_photo','public');
+        }
         TeamMember::create($data);
         return redirect(route('member.list'))->with('success', 'The Member info added successfully');
     }
